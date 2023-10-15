@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../src/HQuery.js"></script>
+</head>
+
+<body>
+    <p id="aaa">hide</p>
+    <p id="bbb">show</p>
+    <p id="ccc">toggle</p>
+    <p id="ddd">fadeIn</p>
+    <p id="eee">fadeOut</p>
+    <p id="fff">slideDown</p>
+    <p id="ggg">slideUp</p>
+    <p id="hhh">get</p>
+    <ul id="list"></ul>
+    <hr />
+    <input type="text" id="test3" value="Mickey Mouse">
+    <a href="http://asd.com" target="_blank" id="url">asd.com</a>
+    <p id="test">test<b>aaa</b></p>
+    <div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div><br>
+    <div id="div2" style="width:80px;height:80px;display:none;background-color:blue;"></div><br>
+    <script>
+        $("#aaa").click(function () {
+            // $("#test").hide();
+            console.log($("#test").css({"color": "red", "font-size": "100px"}));
+        });
+        $("#bbb").click(function () {
+            $("#test").show();
+        });
+        $("#ccc").click(function () {
+            $("#test").toggle();
+        });
+        $("#ddd").click(function () {
+            $("#div1").fadeIn(1000);
+        });
+        $("#eee").click(function () {
+            $("#div1").fadeOut(1000);
+            $("#eee").addClass("a");
+            $("#eee").removeClass("aa");
+        });
+        $("#fff").click(function () {
+            $("#div2").slideDown(1000);
+            $("p").remove();
+        });
+        $("#ggg").click(function () {
+            $("#div2").slideUp(1000);
+            $("#list").prepend("<li>" + Date.now() + "</li>");
+        });
+        $("#hhh").click(function () {
+            $().get("https://reqres.in/api/users?page=2", function (data, status) {
+            })
+        })
+
+        $("#test3").val("aaaaaaa")
+        $("#url").attr({"href": "http://example.com", "color": "red"});
+    </script>
+</body>
