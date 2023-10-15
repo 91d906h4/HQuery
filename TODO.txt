@@ -1,2 +1,2 @@
-1. $(this).hide(); not working.
-2. $("p").hide("slow") not working.
+1. $(this).hide(); 
+2. $("p").hide("slow");
