@@ -166,7 +166,7 @@ $.prototype = {
     fadeIn: function (duration) {
         this.element.forEach(function (element) {
             if (duration === undefined) duration = 500;
-            if (element.style.display !== "none") return;
+            if (element.style.display !== "none") return this;
             else element.style.removeProperty("display");
 
             let start;
@@ -191,7 +191,7 @@ $.prototype = {
     fadeOut: function (duration) {
         this.element.forEach(function (element) {
             if (duration === undefined) duration = 500;
-            if (element.style.display === "none") return;
+            if (element.style.display === "none") return this;
 
             let start;
             function step(timestamp) {
@@ -219,7 +219,7 @@ $.prototype = {
     slideDown: function (duration) {
         this.element.forEach(function (element) {
             if (duration === undefined) duration = 500;
-            if (element.style.display !== "none") return;
+            if (element.style.display !== "none") return this;
             else element.style.removeProperty("display");
 
             const height = element.offsetHeight;
@@ -327,24 +327,36 @@ $.prototype = {
         if (name === undefined) return this;
         else if (typeof name === "object") {
             for (var [key, val] of Object.entries(name)) {
-                this.element.forEach(function (element) { element.setAttribute(key, val); });
+                this.element.forEach(function (element) {
+                    element.setAttribute(key, val);
+                });
             }
         }
-        else this.element.forEach(function (element) { element.setAttribute(name, value); });
+        else {
+            this.element.forEach(function (element) {
+                element.setAttribute(name, value);
+            });
+        }
 
         return this;
     },
 
     append: function (content) {
-        if (content === undefined) return this;
-        else this.element.forEach(function (element) { element.innerHTML += content; });
+        if (content !== undefined) {
+            this.element.forEach(function (element) {
+                element.innerHTML += content;
+            });
+        }
 
         return this;
     },
 
     prepend: function (content) {
-        if (content === undefined) return this;
-        else this.element.forEach(function (element) { element.innerHTML = content + element.innerHTML; });
+        if (content !== undefined) {
+            this.element.forEach(function (element) {
+                element.innerHTML = content + element.innerHTML;
+            });
+        }
 
         return this;
     },
@@ -393,11 +405,13 @@ $.prototype = {
         if (name === undefined) return this;
         else if (typeof name === "object") {
             for (var [key, val] of Object.entries(name)) {
-                this.element.forEach(function (element) { element.style[key] = val; });
+                this.element.forEach(function (element) {
+                    element.style[key] = val;
+                });
             }
         }
         else if (value === undefined) {
-            const style = getComputedStyle(this.element[0]);
+            let style = getComputedStyle(this.element[0]);
             return style[name];
         }
         else {
@@ -405,6 +419,9 @@ $.prototype = {
         }
 
         return this;
-    }
+    },
     // End of HTML.
+
+    // Utility.
+    // End of utility.
 }
